@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :file_uploads
+  resources :file_uploads do
+    member do
+      post 'generate_token'
+    end
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,5 +15,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   # root to: "home#index"
   # resources :file_uploads
-  # root "file_uploads#index"
+  root "file_uploads#index"
+
+  get 'public_url/:share_key', to: 'file_uploads#download_file', as: :share_file
 end

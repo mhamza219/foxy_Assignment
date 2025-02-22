@@ -2,9 +2,12 @@
 
 <%= render @file_upload %>
 
+
+
 <div>
   <%= link_to "Edit this file upload", edit_file_upload_path(@file_upload) %> |
   <%= link_to "Back to file uploads", file_uploads_path %>
 
-  <%= button_to "Destroy this file upload", @file_upload, method: :delete %>
+  <%#= button_to "Destroy this file upload", @file_upload, method: :delete %>
 </div>
+

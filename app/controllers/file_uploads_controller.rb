@@ -1,9 +1,10 @@
 class FileUploadsController < ApplicationController
-  before_action :set_file_upload, only: %i[ show edit update destroy ]
+  before_action :set_file_upload, only: %i[ show edit update destroy generate_token]
+  before_action :authenticate_user!, except:[:download_file]
 
   # GET /file_uploads or /file_uploads.json
   def index
-    @file_uploads = FileUpload.all
+    @file_uploads = current_user.file_uploads
   end
 
   # GET /file_uploads/1 or /file_uploads/1.json
@@ -56,6 +57,31 @@ class FileUploadsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to file_uploads_path, status: :see_other, notice: "File upload was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # # Generatin share token
+  def download_file
+    # byebug
+    @find_file_by_token = FileUpload.find_by_share_key(params[:share_key])
+    if @find_file_by_token&.file&.attached?
+      redirect_to rails_blob_url(@find_file_by_token.file, disposition: "attachment"), allow_other_host: true
+      # render json: { status: 'success', message: 'File has been downloaded.'}
+      # rails_blob_url(@find_file_by_token.file, disposition: "attachment")
+    else
+      redirect_to root_path, alert: "File not found."
+    end
+  end
+
+  def generate_token
+    # byebug
+    # @file_upload = FileUpload.find(params[:id])
+    
+    if @file_upload.share_key.empty?
+      @file_upload.update(share_key: SecureRandom.urlsafe_base64(16))
+      redirect_to @file_upload, notice: "Token generated successfully."
+    else
+      redirect_to @file_upload, alert: "Token already exists."
     end
   end
 
