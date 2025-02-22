@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>File uploads</h1>
+
+<div id="file_uploads">
+  <% @file_uploads.each do |file_upload| %>
+    <%= render file_upload %>
+    <p>
+      <%= link_to "Show this file upload", file_upload %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New file upload", new_file_upload_path %>
