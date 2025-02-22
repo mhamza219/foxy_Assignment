@@ -1,14 +1,24 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>File uploads</h1>
+<h1>File Uploads</h1>
 
-<div id="file_uploads">
-  <% @file_uploads.each do |file_upload| %>
-    <%= render file_upload %>
-    <p>
-      <%= link_to "Show this file upload", file_upload %>
-    </p>
-  <% end %>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Share Key</th>
+        <th>File</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="file_uploads">
+      <% @file_uploads.each do |file_upload| %>
+        <%= render file_upload %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New file upload", new_file_upload_path %>
+<%= link_to "New file upload", new_file_upload_path, class: "btn btn-primary" %>

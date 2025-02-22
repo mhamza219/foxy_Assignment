@@ -1,29 +1,9 @@
-<div id="<%= dom_id file_upload %>">
-  <p>
-    <strong>Title:</strong>
-    <%= file_upload.title %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= file_upload.description %>
-  </p>
-
-  <p>
-    <strong>Share key:</strong>
-    <%= file_upload.share_key %>
-  </p>
-
-  <p>
-    <strong>File:</strong>
-    <%= file_upload.file %>
-  </p>
-
-  <%# <p> %>
-    <%# <strong>User:</strong> %>
-    <%#= file_upload.user_id %>
-  <%# </p> %>
-  <%#= link_to 'Share', share_file_upload_path(file_upload), method: :post %>
-
-  <%#= link_to "Download", rails_blob_path(file_upload.file, disposition: "attachment") %>
-</div>
+<tr id="<%= dom_id file_upload %>">
+  <td><%= file_upload.title %></td>
+  <td><%= file_upload.description %></td>
+  <td><%= file_upload.share_key %></td>
+  <td><%= file_upload.file %></td>
+  <td>
+    <%= link_to "Show", file_upload, class: "btn btn-info btn-sm" %>
+  </td>
+</tr>
