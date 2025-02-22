@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :file_uploads
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,5 +9,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root to: "home#index"
+  # root to: "home#index"
+  # resources :file_uploads
+  # root "file_uploads#index"
 end
